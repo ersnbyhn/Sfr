@@ -7,7 +7,7 @@
     <HTA:APPLICATION 
         ID="objEBSifreApp"
         APPLICATIONNAME="EBSifreYonetici"
-        SCROLL="no"
+        SCROLL="yes"
         SINGLEINSTANCE="yes"
         WINDOWSTATE="maximize"
         BORDER="none"
@@ -22,11 +22,10 @@
         html, body {
             width: 100%;
             height: 100%;
-            overflow: hidden;
             background-color: #ffffff;
         }
 
-        /* ----- SAYFA 1: GİRİŞ (EB LOGO VE ŞİFRE) ----- */
+        /* ----- SAYFA 1: GİRİŞ (DEV LOGO + ŞİFRE) ----- */
         #page-login {
             display: flex;
             flex-direction: column;
@@ -37,40 +36,41 @@
             background-color: #ffffff;
             padding: 20px;
         }
-        .logo-img {
-            max-width: 80vw;
-            max-height: 55vh;
+        /* Logoyu dev boyuta getiren kısım */
+        .logo-img-huge {
+            width: 90vw;
+            height: 70vh;
             object-fit: contain;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .login-box {
             width: 100%;
-            max-width: 420px;
+            max-width: 500px;
             text-align: center;
         }
         .input-password {
             width: 100%;
-            padding: 15px;
-            font-size: 20px;
-            border: 2px solid #111111;
-            border-radius: 8px;
+            padding: 16px;
+            font-size: 22px;
+            border: 3px solid #000000;
+            border-radius: 10px;
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             outline: none;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-weight: bold;
         }
         .input-password:focus {
-            border-color: #000000;
-            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
         }
         .btn-submit {
             width: 100%;
-            padding: 15px;
-            background-color: #111111;
+            padding: 16px;
+            background-color: #000000;
             color: #ffffff;
             border: none;
-            border-radius: 8px;
-            font-size: 18px;
+            border-radius: 10px;
+            font-size: 20px;
             font-weight: bold;
             cursor: pointer;
         }
@@ -80,81 +80,84 @@
         .error-message {
             color: #d9534f;
             font-weight: bold;
-            margin-top: 12px;
+            margin-top: 10px;
             display: none;
-            font-size: 16px;
+            font-size: 18px;
         }
 
-        /* ----- SAYFA 2: ŞİFRELERİM (3 EŞİT SÜTUN) ----- */
+        /* ----- SAYFA 2: ÇİZİME UYGUN 3 SÜTUNLU ŞİFRE TABLOSU ----- */
         #page-vault {
             display: none;
             width: 100vw;
-            height: 100vh;
+            min-height: 100vh;
             padding: 20px;
-            background-color: #f4f6f9;
+            background-color: #ffffff;
         }
         .vault-header {
-            height: 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ccc;
+            border-bottom: 3px solid #000;
             padding-bottom: 10px;
             margin-bottom: 15px;
         }
         .vault-header h1 {
-            color: #111111;
-            font-size: 24px;
-        }
-        .grid-3-col {
-            display: flex;
-            gap: 15px;
-            height: calc(100vh - 105px);
-            width: 100%;
-        }
-        .column {
-            flex: 1;
-            background: #ffffff;
-            border: 2px solid #111111;
-            border-radius: 8px;
-            padding: 15px;
-            overflow-y: auto;
-        }
-        .column-header {
-            font-size: 18px;
-            font-weight: bold;
-            text-align: center;
-            padding: 10px;
-            background-color: #111111;
-            color: white;
-            border-radius: 6px;
-            margin-bottom: 15px;
-        }
-        .data-row {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            padding: 12px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-        }
-        .data-row strong {
-            display: block;
-            color: #555;
-            font-size: 12px;
-        }
-        .data-row span {
-            font-size: 15px;
-            font-weight: bold;
-            color: #222;
+            color: #000;
+            font-size: 26px;
+            font-weight: 800;
         }
         .btn-lock {
-            padding: 8px 16px;
+            padding: 10px 20px;
             background-color: #c0392b;
             color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* 3 Sütunlu Çizim Izgarası */
+        .grid-3-columns {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            border: 3px solid #000;
+            padding: 10px;
+            background-color: #fff;
+        }
+        .column-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            border: 2px solid #000;
+            padding: 8px;
+            background-color: #fafafa;
+        }
+        .column-title {
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            padding: 8px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        /* Şifrelerinizi yazacağınız satırlar */
+        .pass-input-row {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #000;
+            border-radius: 3px;
+            background-color: #ffffff;
+            outline: none;
+        }
+        .pass-input-row:focus {
+            background-color: #eef7ff;
+            border-color: #0056b3;
         }
     </style>
 
@@ -190,63 +193,69 @@
 </head>
 <body>
 
-    <!-- SAYFA 1: LOGIN -->
+    <!-- SAYFA 1: GİRİŞ (DEV LOGO) -->
     <div id="page-login">
-        <!-- Doğrudan Resim Linkiniz -->
-        <img src="https://i.ibb.co/mFNgxpdC/icon-192.png" alt="EB Logo" class="logo-img" />
+        <!-- Ekranı kaplayan dev logonuz -->
+        <img src="https://i.ibb.co/mFNgxpdC/icon-192.png" alt="EB Logo" class="logo-img-huge" />
         
         <div class="login-box">
-            <input type="password" id="txtPass" class="input-password" placeholder="Şifrenizi Girin" onkeypress="keyCheck(event)" />
+            <input type="password" id="txtPass" class="input-password" placeholder="ŞİFRE" onkeypress="keyCheck(event)" />
             <button class="btn-submit" onclick="girisYap()">GİRİŞ YAP</button>
-            <div id="lblError" class="error-message">Hatalı Şifre! Lütfen Tekrar Deneyin.</div>
+            <div id="lblError" class="error-message">Hatalı Şifre!</div>
         </div>
     </div>
 
-    <!-- SAYFA 2: ŞİFRELERİM (3 EŞİT SÜTUN) -->
+    <!-- SAYFA 2: ÇİZİME UYGUN ŞİFRE YAZMA ALANI (3 SÜTUN) -->
     <div id="page-vault">
         <div class="vault-header">
-            <h1>PAGE 2: ŞİFRELERİM</h1>
+            <h1>ŞİFRELERİM</h1>
             <button class="btn-lock" onclick="cikisYap()">KİLİTLE</button>
         </div>
 
-        <div class="grid-3-col">
+        <div class="grid-3-columns">
             <!-- 1. SÜTUN -->
-            <div class="column">
-                <div class="column-header">ÖNEMLİ HESAPLAR</div>
-                <div class="data-row">
-                    <strong>E-Posta:</strong>
-                    <span>ornek@gmail.com</span>
-                </div>
-                <div class="data-row">
-                    <strong>Banka Şifresi:</strong>
-                    <span>123456</span>
-                </div>
+            <div class="column-box">
+                <div class="column-title">1. BÖLÜM</div>
+                <input type="text" class="pass-input-row" placeholder="1. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="2. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="3. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="4. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="5. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="6. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="7. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="8. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="9. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="10. Şifre Kaydı..." />
             </div>
 
             <!-- 2. SÜTUN -->
-            <div class="column">
-                <div class="column-header">İŞ VE PROJELER</div>
-                <div class="data-row">
-                    <strong>İş Postası:</strong>
-                    <span>is@sirket.com</span>
-                </div>
-                <div class="data-row">
-                    <strong>Sunucu Girişi:</strong>
-                    <span>Admin_2026</span>
-                </div>
+            <div class="column-box">
+                <div class="column-title">2. BÖLÜM</div>
+                <input type="text" class="pass-input-row" placeholder="1. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="2. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="3. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="4. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="5. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="6. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="7. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="8. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="9. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="10. Şifre Kaydı..." />
             </div>
 
             <!-- 3. SÜTUN -->
-            <div class="column">
-                <div class="column-header">DİĞER KAYITLAR</div>
-                <div class="data-row">
-                    <strong>Wi-Fi Şifresi:</strong>
-                    <span>Wifi123456</span>
-                </div>
-                <div class="data-row">
-                    <strong>Sosyal Medya:</strong>
-                    <span>@kullanici</span>
-                </div>
+            <div class="column-box">
+                <div class="column-title">3. BÖLÜM</div>
+                <input type="text" class="pass-input-row" placeholder="1. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="2. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="3. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="4. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="5. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="6. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="7. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="8. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="9. Şifre Kaydı..." />
+                <input type="text" class="pass-input-row" placeholder="10. Şifre Kaydı..." />
             </div>
         </div>
     </div>
