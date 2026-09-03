@@ -26,7 +26,7 @@
             overflow: hidden;
         }
 
-        /* ----- SAYFA 1: GİRİŞ (ORİJİNAL BOYUT VE NETLİK) ----- */
+        /* ----- SAYFA 1: GİRİŞ (YENİ ORİJİNAL LOGO) ----- */
         #page-login {
             display: flex;
             flex-direction: column;
@@ -37,7 +37,7 @@
             background-color: #ffffff;
             padding: 20px;
         }
-        /* Görselin kendi orijinal boyutunu koruyan stil */
+        /* Görselin kendi orijinal piksel kalitesini ve oranını koruyan stil */
         .logo-img-original {
             width: auto;
             height: auto;
@@ -45,7 +45,7 @@
             max-height: 60vh;
             display: block;
             margin-bottom: 30px;
-            image-rendering: -webkit-optimize-contrast; /* Netlik ayarı */
+            image-rendering: -webkit-optimize-contrast;
         }
         .login-box {
             width: 100%;
@@ -156,9 +156,9 @@
 </head>
 <body>
 
-    <!-- SAYFA 1: GİRİŞ (ORİJİNAL NET LOGO) -->
+    <!-- SAYFA 1: GİRİŞ (YENİ LOGO LINKI) -->
     <div id="page-login">
-        <img src="https://i.ibb.co/ZzL4V3HW/image.png" alt="EB Logo" class="logo-img-original" onerror="this.src='https://i.ibb.co/mFNgxpdC/icon-192.png';" />
+        <img src="https://i.ibb.co/pjNZxBvc/image.png" alt="EB Logo" class="logo-img-original" onerror="this.src='https://i.ibb.co/ZzL4V3HW/image.png';" />
         
         <div class="login-box">
             <input type="password" id="txtPass" class="input-password" placeholder="Şifrenizi Girin" onkeypress="keyCheck(event)" />
