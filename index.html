@@ -26,9 +26,9 @@
         html, body {
             width: 100%;
             height: 100%;
-            background-color: #0f172a;
+            background-color: #ffffff; /* Arka plan tamamen beyaz */
             overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
         }
 
         .main-container {
@@ -37,69 +37,29 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            position: relative;
-        }
-
-        .img-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .img-wrapper img {
             display: block;
-            /* Resim ekrandan küçükse orijinal boyutunda kalır, büyükse ekrana tam sığar */
-            max-width: 100vw;
-            max-height: 100vh;
-            width: auto;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7);
-        }
-
-        /* Çıkış butonu */
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #ef4444;
-            color: #ffffff;
-            border: none;
-            padding: 10px 18px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            z-index: 9999;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-
-        .close-btn:hover {
-            background-color: #dc2626;
+            /* Resmin büyük görünmesi için ekran boyutuna oranlandı */
+            width: 80vw;           /* Ekran genişliğinin %80'ini kaplar */
+            max-height: 85vh;      /* Ekran yüksekliğinin %85'ini aşmaz */
+            object-fit: contain;   /* Resmin oranını bozmadan büyümesini sağlar */
         }
     </STYLE>
 
     <SCRIPT LANGUAGE="VBScript">
         Sub Window_OnLoad
-            ' Pencereyi tam ekran yap
             window.resizeTo screen.availWidth, screen.availHeight
             window.moveTo 0, 0
-        End Sub
-
-        Sub KapatApp
-            window.close()
         End Sub
     </SCRIPT>
 </HEAD>
 <BODY>
 
-    <!-- Tam ekranda uygulamayı kapatabilmeniz için buton -->
-    <BUTTON class="close-btn" onclick="KapatApp()">X Kapat</BUTTON>
-
     <DIV class="main-container">
         <DIV class="img-wrapper">
-            <!-- Görselin doğrudan linki -->
-            <IMG src="https://i.ibb.co/ZzL4V3HW/image.png" alt="Şifre Programı" onerror="this.onerror=null; this.src='https://ibb.co/ZzL4V3HW';">
+            <IMG src="https://i.ibb.co/23nVyw8g/MG-2684.jpg" alt="MG-2684">
         </DIV>
     </DIV>
 
