@@ -1,51 +1,107 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Şifre Programı</title>
-    <style>
+<HTML>
+<HEAD>
+    <TITLE>Şifre Programı</TITLE>
+    <HTA:APPLICATION 
+        ID="SifreProgrami"
+        APPLICATIONNAME="Sifre Programi"
+        BORDER="none"
+        BORDERSTYLE="normal"
+        CAPTION="no"
+        ICON=""
+        MAXIMIZEBUTTON="no"
+        MINIMIZEBUTTON="no"
+        SHOWINTASKBAR="yes"
+        SINGLEINSTANCE="yes"
+        SYSMENU="no"
+        VERSION="1.0"
+        WINDOWSTATE="maximize"/>
+
+    <STYLE>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            /* Tüm ekranı kaplayacak tam yükseklik */
-            min-height: 100vh;
-            background-color: #0f172a; /* Şifre arayüzüne uygun koyu arka plan */
-            
-            /* İçeriği dikey ve yatayda tam merkeze hizalama */
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #0f172a;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .main-container {
+            width: 100vw;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: auto;
+            position: relative;
         }
 
-        .image-container {
+        .img-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
         }
 
-        .image-container img {
-            /* Görselin orijinal boyutunda görünmesi için */
-            max-width: 100%;
-            height: auto;
-            object-fit: contain;
+        .img-wrapper img {
             display: block;
-            border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            /* Resim ekrandan küçükse orijinal boyutunda kalır, büyükse ekrana tam sığar */
+            max-width: 100vw;
+            max-height: 100vh;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7);
         }
-    </style>
-</head>
-<body>
 
-    <div class="image-container">
-        <img src="https://ibb.co/ZzL4V3HW" alt="Şifre Programı">
-    </div>
+        /* Çıkış butonu */
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ef4444;
+            color: #ffffff;
+            border: none;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
 
-</body>
-</html>
+        .close-btn:hover {
+            background-color: #dc2626;
+        }
+    </STYLE>
+
+    <SCRIPT LANGUAGE="VBScript">
+        Sub Window_OnLoad
+            ' Pencereyi tam ekran yap
+            window.resizeTo screen.availWidth, screen.availHeight
+            window.moveTo 0, 0
+        End Sub
+
+        Sub KapatApp
+            window.close()
+        End Sub
+    </SCRIPT>
+</HEAD>
+<BODY>
+
+    <!-- Tam ekranda uygulamayı kapatabilmeniz için buton -->
+    <BUTTON class="close-btn" onclick="KapatApp()">X Kapat</BUTTON>
+
+    <DIV class="main-container">
+        <DIV class="img-wrapper">
+            <!-- Görselin doğrudan linki -->
+            <IMG src="https://i.ibb.co/ZzL4V3HW/image.png" alt="Şifre Programı" onerror="this.onerror=null; this.src='https://ibb.co/ZzL4V3HW';">
+        </DIV>
+    </DIV>
+
+</BODY>
+</HTML>
