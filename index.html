@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <title>EB Password Vault</title>
+    <HTA:APPLICATION 
+        ID="objEBSifreApp"
+        APPLICATIONNAME="EBSifreYonetici"
+        SCROLL="yes"
+        SINGLEINSTANCE="yes"
+        WINDOWSTATE="maximize"
+        BORDER="thin"
+    >
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ----- SAYFA 1: GİRİŞ EKRANI ----- */
+        #page-login {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .login-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        .logo-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 25px auto;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 15px rgba(30, 60, 114, 0.3);
+        }
+        .logo-svg {
+            width: 100px;
+            height: 100px;
+            fill: #ffffff;
+        }
+        .login-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            outline: none;
+            text-align: center;
+            transition: border-color 0.3s;
+        }
+        .input-group input:focus {
+            border-color: #2a5298;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+        }
+        .btn-login:hover {
+            opacity: 0.95;
+        }
+        .error-msg {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* ----- SAYFA 2: ŞİFRELERİM (3 SÜTUN) ----- */
+        #page-vault {
+            display: none;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .vault-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e1e8ed;
+        }
+        .vault-header h1 {
+            font-size: 24px;
+            color: #1e3c72;
+        }
+        .grid-container {
+            display: flex;
+            gap: 20px;
+            width: 100%;
+        }
+        .column {
+            flex: 1;
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 5px solid #2a5298;
+        }
+        .column-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .item-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .item-card strong {
+            display: block;
+            font-size: 13px;
+            color: #4a5568;
+        }
+        .item-card span {
+            font-size: 14px;
+            color: #1a202c;
+            font-weight: 600;
+        }
+        .btn-logout {
+            padding: 8px 16px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+
+    <script language="VBScript">
+        Sub Window_OnLoad
+            ' Başlangıç odaklaması
+            document.getElementById("txtPass").focus()
+        End Sub
+
+        Sub GirişYap
+            Dim girilenSifre
+            girilenSifre = document.getElementById("txtPass").value
+            
+            ' Belirlenen Şifre Kontrolü: 8290028
+            If girilenSifre = "8290028" Then
+                document.getElementById("page-login").style.display = "none"
+                document.getElementById("page-vault").style.display = "block"
+                document.getElementById("lblError").style.display = "none"
+            Else
+                document.getElementById("lblError").style.display = "block"
+                document.getElementById("txtPass").value = ""
+                document.getElementById("txtPass").focus()
+            End If
+        End Sub
+
+        Sub EnterKontrol
+            If window.event.keyCode = 13 Then
+                GirişYap
+            End If
+        End Sub
+
+        Sub CikisYap
+            document.getElementById("txtPass").value = ""
+            document.getElementById("page-vault").style.display = "none"
+            document.getElementById("page-login").style.display = "flex"
+            document.getElementById("lblError").style.display = "none"
+            document.getElementById("txtPass").focus()
+        End Sub
+    </script>
+</head>
+<body>
+
+    <div id="page-login">
+        <div class="login-card">
+            <div class="logo-container">
+                <svg class="logo-svg" viewBox="0 0 100 100">
+                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-weight="bold" font-size="42" fill="#ffffff">EB</text>
+                </svg>
+            </div>
+            
+            <div class="login-title">GÜVENLİ GİRİŞ</div>
+            
+            <div class="input-group">
+                <input type="password" id="txtPass" placeholder="Şifrenizi Girin" onkeypress="EnterKontrol" />
+            </div>
+            
+            <button class="btn-login" onclick="GirişYap">GİRİŞ YAP</button>
+            <div id="lblError" class="error-msg">Hatalı Şifre! Tekrar Deneyin.</div>
+        </div>
+    </div>
+
+    <div id="page-vault">
+        <div class="vault-header">
+            <h1>ŞİFRELERİM</h1>
+            <button class="btn-logout" onclick="CikisYap">Kilit hisset / Çıkış Yap</button>
+        </div>
+
+        <div class="grid-container">
+            <div class="column" style="border-top-color: #3498db;">
+                <div class="column-title">ÖNEMLİ HESAPLAR</div>
+                
+                <div class="item-card">
+                    <strong>E-Posta:</strong>
+                    <span>ornek@gmail.com / Sifre123</span>
+                </div>
+                <div class="item-card">
+                    <strong>Banka / İnternet Şubesi:</strong>
+                    <span>Müşteri No: 123456 / Parola: 9876</span>
+                </div>
+                <div class="item-card">
+                    <strong>Sosyal Medya:</strong>
+                    <span>@kullanici / gizlisifre!</span>
+                </div>
+            </div>
+
+            <div class="column" style="border-top-color: #2ecc71;">
+                <div class="column-title">İŞ VE PROJELER</div>
+                
+                <div class="item-card">
+                    <strong>İş E-Posta:</strong>
+                    <span>is@sirket.com / Work2026*</span>
+                </div>
+                <div class="item-card">
+                    <strong>Sunucu / FTP:</strong>
+                    <span>192.168.1.100 / rootPass</span>
+                </div>
+                <div class="item-card">
+                    <strong>Yazılım Hesapları:</strong>
+                    <span>GitHub / User_Dev2026</span>
+                </div>
+            </div>
+
+            <div class="column" style="border-top-color: #e67e22;">
+                <div class="column-title">DİĞER KAYITLAR</div>
+                
+                <div class="item-card">
+                    <strong>Wi-Fi Ağı:</strong>
+                    <span>Ev_Kablosuz / wifiPass829</span>
+                </div>
+                <div class="item-card">
+                    <strong>Dijital Platformlar:</strong>
+                    <span>TV / Film Şifreleri</span>
+                </div>
+                <div class="item-card">
+                    <strong>Yedek Kodlar:</strong>
+                    <span>2FA / Güvenlik Anahtarları</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
