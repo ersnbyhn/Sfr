@@ -1,187 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="UTF-8">
-    <title>EB Vault</title>
-    <HTA:APPLICATION 
-        ID="objEBSifreApp"
-        APPLICATIONNAME="EBSifreYonetici"
-        SCROLL="yes"
-        SINGLEINSTANCE="yes"
-        WINDOWSTATE="maximize"
-        BORDER="none"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Şifre Programı</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-        }
-        html, body {
-            width: 100%;
-            height: 100%;
-            background-color: #ffffff;
-            overflow: hidden;
+            box-sizing: border-box;
         }
 
-        /* ----- SAYFA 1: GİRİŞ (YENİ ORİJİNAL LOGO) ----- */
-        #page-login {
+        body {
+            /* Tüm ekranı kaplayacak tam yükseklik */
+            min-height: 100vh;
+            background-color: #0f172a; /* Şifre arayüzüne uygun koyu arka plan */
+            
+            /* İçeriği dikey ve yatayda tam merkeze hizalama */
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            width: 100vw;
-            height: 100vh;
-            background-color: #ffffff;
-            padding: 20px;
-        }
-        /* Görselin kendi orijinal piksel kalitesini ve oranını koruyan stil */
-        .logo-img-original {
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 60vh;
-            display: block;
-            margin-bottom: 30px;
-            image-rendering: -webkit-optimize-contrast;
-        }
-        .login-box {
-            width: 100%;
-            max-width: 380px;
-            text-align: center;
-        }
-        .input-password {
-            width: 100%;
-            padding: 14px;
-            font-size: 20px;
-            border: 2px solid #000000;
-            border-radius: 6px;
-            text-align: center;
-            margin-bottom: 10px;
-            outline: none;
-            font-weight: bold;
-        }
-        .btn-submit {
-            width: 100%;
-            padding: 14px;
-            background-color: #000000;
-            color: #ffffff;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .btn-submit:hover {
-            background-color: #333333;
-        }
-        .error-message {
-            color: #d9534f;
-            font-weight: bold;
-            margin-top: 8px;
-            display: none;
-            font-size: 15px;
+            overflow: auto;
         }
 
-        /* ----- SAYFA 2: EXCEL TABLOSU (TAMAMEN BOŞ) ----- */
-        #page-vault {
-            display: none;
-            width: 100vw;
-            height: 100vh;
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            background-color: #e6e6e6;
-            overflow-y: auto;
         }
-        .excel-table-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border: 2px solid #000000;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .excel-grid {
-            display: table;
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .excel-row {
-            display: table-row;
-        }
-        .excel-cell {
-            display: table-cell;
-            width: 33.33%;
-            border: 1px solid #7f7f7f;
-            padding: 0;
-            background-color: #ffffff;
-        }
-        .excel-cell input {
-            width: 100%;
-            height: 30px;
-            border: none;
-            outline: none;
-            padding: 4px 8px;
-            font-size: 14px;
-            font-family: Arial, sans-serif;
-            background: transparent;
-        }
-        .excel-cell input:focus {
-            background-color: #e8f2fe;
-            box-shadow: inset 0 0 0 2px #107c41;
+
+        .image-container img {
+            /* Görselin orijinal boyutunda görünmesi için */
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
         }
     </style>
-
-    <script language="JavaScript">
-        function girisYap() {
-            var girilen = document.getElementById("txtPass").value;
-            if (girilen === "8290028") {
-                document.getElementById("page-login").style.display = "none";
-                document.getElementById("page-vault").style.display = "block";
-                document.getElementById("lblError").style.display = "none";
-            } else {
-                document.getElementById("lblError").style.display = "block";
-                document.getElementById("txtPass").value = "";
-                document.getElementById("txtPass").focus();
-            }
-        }
-
-        function keyCheck(e) {
-            var key = e.keyCode || e.which;
-            if (key === 13) {
-                girisYap();
-            }
-        }
-    </script>
 </head>
 <body>
 
-    <!-- SAYFA 1: GİRİŞ (YENİ LOGO LINKI) -->
-    <div id="page-login">
-        <img src="https://i.ibb.co/pjNZxBvc/image.png" alt="EB Logo" class="logo-img-original" onerror="this.src='https://i.ibb.co/ZzL4V3HW/image.png';" />
-        
-        <div class="login-box">
-            <input type="password" id="txtPass" class="input-password" placeholder="Şifrenizi Girin" onkeypress="keyCheck(event)" />
-            <button class="btn-submit" onclick="girisYap()">GİRİŞ YAP</button>
-            <div id="lblError" class="error-message">Hatalı Şifre!</div>
-        </div>
-    </div>
-
-    <!-- SAYFA 2: BOŞ EXCEL TABLOSU -->
-    <div id="page-vault">
-        <div class="excel-table-container">
-            <div class="excel-grid">
-                <script language="JavaScript">
-                    for (var i = 0; i < 40; i++) {
-                        document.write('<div class="excel-row">');
-                        document.write('  <div class="excel-cell"><input type="text" /></div>');
-                        document.write('  <div class="excel-cell"><input type="text" /></div>');
-                        document.write('  <div class="excel-cell"><input type="text" /></div>');
-                        document.write('</div>');
-                    }
-                </script>
-            </div>
-        </div>
+    <div class="image-container">
+        <img src="https://ibb.co/ZzL4V3HW" alt="Şifre Programı">
     </div>
 
 </body>
