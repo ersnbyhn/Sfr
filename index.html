@@ -21,7 +21,6 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-user-select: none;
         }
 
         html, body {
@@ -30,6 +29,9 @@
             background-color: #000000;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            /* Ekranın yakınlaşmasını ve boyut değiştirmesini engeller */
+            touch-action: manipulation;
+            -ms-content-zooming: none;
         }
 
         /* 1. GİRİŞ EKRANI */
@@ -46,8 +48,10 @@
 
         .img-wrapper img {
             display: block;
-            max-width: 250px;
+            max-width: 220px;
+            max-height: 200px;
             height: auto;
+            object-fit: contain;
         }
 
         .login-box {
@@ -96,7 +100,7 @@
             height: 18px;
         }
 
-        /* 2. iPHONE APP EKRANI (TAM SIĞACAK BOYUTLAR) */
+        /* 2. iPHONE APP EKRANI */
         .app-screen {
             display: none;
             width: 100vw;
@@ -182,7 +186,7 @@
         th, td {
             border-bottom: 1px solid #e5e5ea;
             padding: 12px 10px;
-            text-align: center; /* ORTALANDI */
+            text-align: center;
             font-size: 15px;
             color: #1c1c1e;
         }
@@ -221,7 +225,6 @@
 
     <SCRIPT LANGUAGE="VBScript">
         Sub Window_OnLoad
-            ' Ekranı Tam Ekran Yapar
             window.resizeTo screen.availWidth, screen.availHeight
             window.moveTo 0, 0
         End Sub
