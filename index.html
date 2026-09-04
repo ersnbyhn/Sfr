@@ -27,7 +27,7 @@
         html, body {
             width: 100%;
             height: 100%;
-            background-color: #000000; /* iPhone tarzı siyah dış arka plan */
+            background-color: #000000;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
@@ -41,28 +41,30 @@
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
-            gap: 24px;
+            gap: 20px;
         }
 
         .img-wrapper img {
             display: block;
+            max-width: 250px;
+            height: auto;
         }
 
         .login-box {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
 
         .login-box input[type="password"] {
-            padding: 14px 20px;
-            font-size: 20px;
-            border: 2px solid #e2e8f0;
-            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 16px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
             outline: none;
             text-align: center;
-            width: 280px;
+            width: 240px;
             background-color: #f8fafc;
         }
 
@@ -72,15 +74,15 @@
         }
 
         .login-box button {
-            padding: 14px 36px;
-            font-size: 18px;
+            padding: 10px 24px;
+            font-size: 15px;
             font-weight: 600;
             color: #ffffff;
-            background-color: #007aff; /* iOS Mavi Rengi */
+            background-color: #007aff;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            width: 280px;
+            width: 240px;
         }
 
         .login-box button:hover {
@@ -89,58 +91,56 @@
 
         .error-msg {
             color: #ff3b30;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
-            height: 20px;
+            height: 18px;
         }
 
-        /* 2. iPHONE UYGULAMA (APP) EKRANI */
+        /* 2. iPHONE APP EKRANI (TAM SIĞACAK BOYUTLAR) */
         .app-screen {
-            display: none; /* Başlangıçta gizli */
+            display: none;
             width: 100vw;
             height: 100vh;
-            background-color: #f2f2f7; /* iOS Açık Gri Arka Plan */
+            background-color: #f2f2f7;
             flex-direction: column;
             align-items: center;
-            padding: 30px 20px;
-            gap: 20px;
+            padding: 20px;
+            gap: 15px;
         }
 
-        /* iOS Üst Başlık Kartı */
         .app-header {
             width: 100%;
-            max-width: 900px;
+            max-width: 800px;
             text-align: center;
-            padding: 10px 0;
         }
 
         .app-header h1 {
-            font-size: 28px;
+            font-size: 22px;
             color: #000000;
             font-weight: 700;
         }
 
-        /* iOS Ekleme Kartı (Form) */
+        /* Form Kartı */
         .ios-card-form {
             width: 100%;
-            max-width: 900px;
+            max-width: 800px;
             background: #ffffff;
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 12px;
             display: flex;
-            gap: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            gap: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .ios-card-form input {
-            padding: 14px;
-            font-size: 18px;
+            padding: 10px 12px;
+            font-size: 15px;
             border: 1px solid #e5e5ea;
-            border-radius: 10px;
+            border-radius: 8px;
             flex: 1;
             background-color: #f2f2f7;
             outline: none;
-            text-align: center; /* Giriş kutularındaki yazılar ortalandı */
+            text-align: center;
         }
 
         .ios-card-form input:focus {
@@ -149,13 +149,13 @@
         }
 
         .ios-card-form button {
-            padding: 14px 28px;
-            font-size: 18px;
+            padding: 10px 20px;
+            font-size: 15px;
             font-weight: 600;
             color: white;
-            background-color: #34c759; /* iOS Yeşil Rengi */
+            background-color: #34c759;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
         }
 
@@ -163,15 +163,15 @@
             background-color: #28a745;
         }
 
-        /* iOS Tablo Alanı */
+        /* Tablo Kartı */
         .ios-table-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 800px;
             flex: 1;
             overflow-y: auto;
             background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         table {
@@ -181,9 +181,9 @@
 
         th, td {
             border-bottom: 1px solid #e5e5ea;
-            padding: 18px 16px;
-            text-align: center; /* YAZILAR TAM ORTALANDI */
-            font-size: 20px;
+            padding: 12px 10px;
+            text-align: center; /* ORTALANDI */
+            font-size: 15px;
             color: #1c1c1e;
         }
 
@@ -191,7 +191,7 @@
             background-color: #f9f9fb;
             color: #8e8e93;
             font-weight: 600;
-            font-size: 18px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             position: sticky;
@@ -204,13 +204,13 @@
         }
 
         .delete-btn {
-            background-color: #ff3b30; /* iOS Kırmızı Rengi */
+            background-color: #ff3b30;
             color: white;
             border: none;
-            padding: 8px 18px;
-            border-radius: 8px;
+            padding: 6px 14px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 600;
         }
 
@@ -221,6 +221,7 @@
 
     <SCRIPT LANGUAGE="VBScript">
         Sub Window_OnLoad
+            ' Ekranı Tam Ekran Yapar
             window.resizeTo screen.availWidth, screen.availHeight
             window.moveTo 0, 0
         End Sub
@@ -297,7 +298,7 @@
         </DIV>
     </DIV>
 
-    <!-- 2. iOS UYGULAMA EKRANI -->
+    <!-- 2. iPHONE UYGULAMA EKRANI -->
     <DIV class="app-screen" id="appScreen">
         
         <DIV class="app-header">
