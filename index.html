@@ -1,47 +1,48 @@
-<HTML>
-<HEAD>
-    <META http-equiv="X-UA-Compatible" content="IE=edge" />
-    <TITLE>Şifre Programı</TITLE>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <HTA:APPLICATION 
-        ID="SifreProgrami"
-        APPLICATIONNAME="Sifre Programi"
-        BORDER="thin"
-        BORDERSTYLE="normal"
-        CAPTION="yes"
-        MAXIMIZEBUTTON="no"
-        MINIMIZEBUTTON="yes"
-        SCROLL="no"
-        SCROLLFLAT="yes"
-        SHOWINTASKBAR="yes"
-        SINGLEINSTANCE="yes"
-        SYSMENU="yes"
-        VERSION="1.0"
-        WINDOWSTATE="normal"/>
-
-    <STYLE>
+    <!-- iPhone PWA ve Tam Ekran Ayarları -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Şifre Kasası">
+    
+    <title>Şifre Kasası</title>
+    
+    <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
-        html, body {
-            width: 100%;
-            height: 100%;
+        body {
+            width: 100vw;
+            height: 100vh;
             background-color: #f2f2f7;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            overflow: hidden;
-        }
-
-        /* UYGULAMA KAPSAYICISI (TELEFON EKRANI BOYUTU) */
-        .app-container {
-            width: 100%;
-            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            background-color: #f2f2f7;
+            overflow: hidden;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .app-header {
+            height: 50px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 0.5px solid #b2b2b2;
+            font-weight: 600;
+            font-size: 17px;
+            color: #000;
         }
 
         /* 1. GİRİŞ EKRANI */
@@ -52,111 +53,113 @@
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
-            gap: 16px;
+            gap: 20px;
             padding: 20px;
         }
 
         .img-wrapper img {
-            display: block;
-            max-width: 140px;
-            max-height: 140px;
-            object-fit: contain;
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .login-box {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
+            max-width: 320px;
         }
 
         .login-box input[type="password"] {
-            padding: 10px;
-            font-size: 15px;
-            border: 2px solid #cbd5e1;
-            border-radius: 8px;
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
+            border: 1px solid #c7c7cc;
+            border-radius: 12px;
             outline: none;
             text-align: center;
-            width: 85%;
-            background-color: #f8fafc;
-        }
-
-        .login-box input[type="password"]:focus {
-            border-color: #007aff;
-            background-color: #ffffff;
+            background-color: #eef1f5;
         }
 
         .login-box button {
-            padding: 10px;
-            font-size: 15px;
+            width: 100%;
+            padding: 14px;
+            font-size: 16px;
             font-weight: 600;
             color: #ffffff;
             background-color: #007aff;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
-            width: 85%;
+        }
+
+        .login-box button:active {
+            opacity: 0.7;
         }
 
         .error-msg {
             color: #ff3b30;
-            font-size: 13px;
-            font-weight: 600;
-            height: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            height: 18px;
         }
 
-        /* 2. TABLO EKRANI (İPHONE MOBİL DÜZEN) */
+        /* 2. TABLO EKRANI */
         .app-screen {
             display: none;
             flex: 1;
             flex-direction: column;
             padding: 12px;
-            gap: 10px;
+            gap: 12px;
             overflow: hidden;
         }
 
-        /* Form Kartı */
         .ios-card-form {
             background: #ffffff;
-            border-radius: 10px;
-            padding: 8px;
+            border-radius: 12px;
+            padding: 10px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e5e5ea;
+            gap: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .ios-card-form input {
-            padding: 8px;
-            font-size: 13px;
+            padding: 10px;
+            font-size: 16px;
             border: 1px solid #e5e5ea;
-            border-radius: 6px;
+            border-radius: 8px;
             background-color: #f8fafc;
             outline: none;
             text-align: center;
         }
 
         .ios-card-form button {
-            padding: 8px;
-            font-size: 14px;
+            padding: 10px;
+            font-size: 15px;
             font-weight: 600;
             color: white;
             background-color: #34c759;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
         }
 
-        /* Tablo Alanı */
+        .ios-card-form button:active {
+            opacity: 0.7;
+        }
+
         .ios-table-container {
             flex: 1;
             overflow-y: auto;
             background: #ffffff;
-            border-radius: 10px;
+            border-radius: 12px;
             border: 1px solid #e5e5ea;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+            -webkit-overflow-scrolling: touch;
         }
 
         table {
@@ -165,82 +168,131 @@
         }
 
         th, td {
-            border-bottom: 1px solid #e5e5ea;
-            padding: 8px 4px;
+            border-bottom: 0.5px solid #e5e5ea;
+            padding: 10px 4px;
             text-align: center;
-            font-size: 12px;
+            font-size: 13px;
             color: #1c1c1e;
             word-break: break-all;
         }
 
         th {
             background-color: #f9f9fb;
-            color: #000000;
-            font-weight: 700;
-            font-size: 12px;
+            color: #8e8e93;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
             position: sticky;
             top: 0;
             z-index: 10;
-            border-bottom: 2px solid #e5e5ea;
         }
 
         .delete-btn {
             background-color: #ff3b30;
             color: white;
             border: none;
-            padding: 4px 6px;
-            border-radius: 4px;
+            padding: 6px 8px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 11px;
             font-weight: 600;
         }
 
-        /* Alt Bilgi Barı */
         .phone-footer {
-            height: 22px;
-            background-color: #e5e5ea;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 10px;
-            font-size: 10px;
-            color: #666666;
+            padding: 0 12px;
+            font-size: 11px;
+            color: #8e8e93;
         }
-    </STYLE>
+    </style>
+</head>
+<body>
 
-    <SCRIPT LANGUAGE="VBScript">
-        Sub Window_OnLoad
-            ' Pencere boyutunu dikey telefon boyutunda kilitler (380x720)
-            Dim w, h, x, y
-            w = 390
-            h = 720
-            x = (screen.availWidth - w) / 2
-            y = (screen.availHeight - h) / 2
-            
-            window.resizeTo w, h
-            window.moveTo x, y
-        End Sub
-    </SCRIPT>
+    <div class="app-header">ŞİFRE KASASI</div>
 
-    <SCRIPT LANGUAGE="JavaScript">
+    <!-- GİRİŞ EKRANI -->
+    <div class="login-screen" id="loginScreen">
+        <div class="img-wrapper">
+            <img src="https://i.ibb.co/23nVyw8g/MG-2684.jpg" alt="Logo">
+        </div>
+
+        <div class="login-box">
+            <input type="password" id="passInput" placeholder="Şifrenizi Girin" autofocus>
+            <button onclick="sifreKontrol()">Giriş Yap</button>
+            <div class="error-msg" id="errorText"></div>
+        </div>
+    </div>
+
+    <!-- TABLO EKRANI -->
+    <div class="app-screen" id="appScreen">
+        <div class="ios-card-form">
+            <input type="text" id="inputIsim" placeholder="İsim (Örn: Instagram)">
+            <input type="text" id="inputKadi" placeholder="Kullanıcı Adı / E-posta">
+            <input type="text" id="inputSifre" placeholder="Şifre">
+            <button onclick="satirEkle()">Satır Ekle</button>
+        </div>
+
+        <div class="ios-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 28%;">İsim</th>
+                        <th style="width: 38%;">Kullanıcı Adı</th>
+                        <th style="width: 22%;">Şifre</th>
+                        <th style="width: 12%;">Sil</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="phone-footer">
+        <span>Şifre Kasası</span>
+        <span>ErsNByhN® 2026</span>
+    </div>
+
+    <script>
+        // Sayfa yüklendiğinde hafızadaki verileri oku
+        document.addEventListener("DOMContentLoaded", verileriYukle);
+
         function sifreKontrol() {
             var girilenSifre = document.getElementById("passInput").value;
-            var dogruSifre = "8290028";
-
-            if (girilenSifre === dogruSifre) {
+            if (girilenSifre === "8290028") {
                 document.getElementById("loginScreen").style.display = "none";
                 document.getElementById("appScreen").style.display = "flex";
             } else {
                 document.getElementById("errorText").innerText = "Hatalı şifre!";
                 document.getElementById("passInput").value = "";
-                document.getElementById("passInput").focus();
             }
         }
 
-        function tusKontrol(e) {
-            if (e.keyCode === 13) {
-                sifreKontrol();
-            }
+        function verileriAl() {
+            var veriler = localStorage.getItem("sifreKasasiData");
+            return veriler ? JSON.parse(veriler) : [
+                { isim: "Hepsiburada", kadi: "ersibeyhan@gmail.com", sifre: "123456" }
+            ];
+        }
+
+        function verileriKaydet(veriDizisi) {
+            localStorage.setItem("sifreKasasiData", JSON.stringify(veriDizisi));
+        }
+
+        function verileriYukle() {
+            var tbody = document.getElementById("tableBody");
+            tbody.innerHTML = "";
+            var veriler = verileriAl();
+
+            veriler.forEach(function(item, index) {
+                var newRow = tbody.insertRow();
+                newRow.insertCell(0).innerText = item.isim;
+                newRow.insertCell(1).innerText = item.kadi;
+                newRow.insertCell(2).innerText = item.sifre;
+                newRow.insertCell(3).innerHTML = '<button class="delete-btn" onclick="satirSil(' + index + ')">Sil</button>';
+            });
         }
 
         function satirEkle() {
@@ -248,95 +300,27 @@
             var kadi = document.getElementById("inputKadi").value;
             var sifre = document.getElementById("inputSifre").value;
 
-            if (isim === "" || kadi === "" || sifre === "") {
+            if (!isim || !kadi || !sifre) {
                 alert("Lütfen tüm alanları doldurun!");
                 return;
             }
 
-            var tbody = document.getElementById("tableBody");
-            var newRow = tbody.insertRow();
-
-            var cell1 = newRow.insertCell(0);
-            var cell2 = newRow.insertCell(1);
-            var cell3 = newRow.insertCell(2);
-            var cell4 = newRow.insertCell(3);
-
-            cell1.innerText = isim;
-            cell2.innerText = kadi;
-            cell3.innerText = sifre;
-            cell4.innerHTML = '<button class="delete-btn" onclick="satirSil(this)">Sil</button>';
+            var veriler = verileriAl();
+            veriler.push({ isim: isim, kadi: kadi, sifre: sifre });
+            verileriKaydet(veriler);
+            verileriYukle();
 
             document.getElementById("inputIsim").value = "";
             document.getElementById("inputKadi").value = "";
             document.getElementById("inputSifre").value = "";
-            document.getElementById("inputIsim").focus();
         }
 
-        function satirSil(btn) {
-            var row = btn.parentNode.parentNode;
-            row.parentNode.removeChild(row);
+        function satirSil(index) {
+            var veriler = verileriAl();
+            veriler.splice(index, 1);
+            verileriKaydet(veriler);
+            verileriYukle();
         }
-    </SCRIPT>
-</HEAD>
-<BODY>
-
-    <DIV class="app-container">
-
-        <!-- 1. GİRİŞ EKRANI -->
-        <DIV class="login-screen" id="loginScreen">
-            <DIV class="img-wrapper">
-                <IMG src="https://i.ibb.co/23nVyw8g/MG-2684.jpg" alt="Logo">
-            </DIV>
-
-            <DIV class="login-box">
-                <INPUT type="password" id="passInput" placeholder="Şifre" onkeypress="tusKontrol(event)" autofocus>
-                <BUTTON onclick="sifreKontrol()">Giriş Yap</BUTTON>
-                <DIV class="error-msg" id="errorText"></DIV>
-            </DIV>
-        </DIV>
-
-        <!-- 2. iPHONE MOBİL TABLO EKRANI -->
-        <DIV class="app-screen" id="appScreen">
-            
-            <!-- Ekleme Formu -->
-            <DIV class="ios-card-form">
-                <INPUT type="text" id="inputIsim" placeholder="İsim">
-                <INPUT type="text" id="inputKadi" placeholder="Kullanıcı Adı / E-posta">
-                <INPUT type="text" id="inputSifre" placeholder="Şifre">
-                <BUTTON onclick="satirEkle()">Satır Ekle</BUTTON>
-            </DIV>
-
-            <!-- Mobil Tablo -->
-            <DIV class="ios-table-container">
-                <TABLE>
-                    <THEAD>
-                        <TR>
-                            <TH style="width: 30%;">İsim</TH>
-                            <TH style="width: 35%;">Kullanıcı Adı</TH>
-                            <TH style="width: 23%;">Şifre</TH>
-                            <TH style="width: 12%;">Sil</TH>
-                        </TR>
-                    </THEAD>
-                    <TBODY id="tableBody">
-                        <TR>
-                            <TD>Hepsiburada</TD>
-                            <TD>ersibeyhan@gmail.com</TD>
-                            <TD>123456</TD>
-                            <TD><BUTTON class="delete-btn" onclick="satirSil(this)">Sil</BUTTON></TD>
-                        </TR>
-                    </TBODY>
-                </TABLE>
-            </DIV>
-
-        </DIV>
-
-        <!-- Alt Bilgi Barı -->
-        <DIV class="phone-footer">
-            <SPAN>Şifre Kasası</SPAN>
-            <SPAN>ErsNByhN® 2026</SPAN>
-        </DIV>
-
-    </DIV>
-
-</BODY>
-</HTML>
+    </script>
+</body>
+</html>
