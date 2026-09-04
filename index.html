@@ -21,14 +21,15 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-user-select: none;
         }
 
         html, body {
             width: 100%;
             height: 100%;
-            background-color: #ffffff;
+            background-color: #000000; /* iPhone tarzı siyah dış arka plan */
             overflow: hidden;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         /* 1. GİRİŞ EKRANI */
@@ -39,6 +40,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            background-color: #ffffff;
             gap: 24px;
         }
 
@@ -54,94 +56,122 @@
         }
 
         .login-box input[type="password"] {
-            padding: 12px 20px;
-            font-size: 20px; /* Büyük yazı */
-            border: 2px solid #94a3b8;
-            border-radius: 8px;
+            padding: 14px 20px;
+            font-size: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
             outline: none;
             text-align: center;
-            width: 260px;
+            width: 280px;
+            background-color: #f8fafc;
         }
 
         .login-box input[type="password"]:focus {
-            border-color: #0284c7;
+            border-color: #007aff;
+            background-color: #ffffff;
         }
 
         .login-box button {
-            padding: 12px 32px;
-            font-size: 18px; /* Büyük yazı */
-            font-weight: bold;
+            padding: 14px 36px;
+            font-size: 18px;
+            font-weight: 600;
             color: #ffffff;
-            background-color: #0284c7;
+            background-color: #007aff; /* iOS Mavi Rengi */
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             cursor: pointer;
+            width: 280px;
         }
 
         .login-box button:hover {
-            background-color: #0369a1;
+            background-color: #0056b3;
         }
 
         .error-msg {
-            color: #ef4444;
+            color: #ff3b30;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             height: 20px;
         }
 
-        /* 2. TABLO EKRANI (EXCEL TARZI TAM EKRAN) */
-        .data-screen {
+        /* 2. iPHONE UYGULAMA (APP) EKRANI */
+        .app-screen {
             display: none; /* Başlangıçta gizli */
             width: 100vw;
             height: 100vh;
-            padding: 20px;
-            background-color: #e2e8f0;
+            background-color: #f2f2f7; /* iOS Açık Gri Arka Plan */
             flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            padding: 30px 20px;
+            gap: 20px;
         }
 
-        /* Yeni Satır Ekleme Formu */
-        .add-form {
+        /* iOS Üst Başlık Kartı */
+        .app-header {
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .app-header h1 {
+            font-size: 28px;
+            color: #000000;
+            font-weight: 700;
+        }
+
+        /* iOS Ekleme Kartı (Form) */
+        .ios-card-form {
+            width: 100%;
+            max-width: 900px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
             display: flex;
             gap: 12px;
-            background-color: #ffffff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
-        .add-form input {
-            padding: 12px 16px;
-            font-size: 18px; /* Büyük input yazıları */
-            border: 2px solid #cbd5e1;
-            border-radius: 6px;
+        .ios-card-form input {
+            padding: 14px;
+            font-size: 18px;
+            border: 1px solid #e5e5ea;
+            border-radius: 10px;
             flex: 1;
+            background-color: #f2f2f7;
+            outline: none;
+            text-align: center; /* Giriş kutularındaki yazılar ortalandı */
         }
 
-        .add-form button {
-            padding: 12px 28px;
-            font-size: 18px; /* Büyük buton yazısı */
-            font-weight: bold;
+        .ios-card-form input:focus {
+            background-color: #ffffff;
+            border-color: #007aff;
+        }
+
+        .ios-card-form button {
+            padding: 14px 28px;
+            font-size: 18px;
+            font-weight: 600;
             color: white;
-            background-color: #16a34a;
+            background-color: #34c759; /* iOS Yeşil Rengi */
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
         }
 
-        .add-form button:hover {
-            background-color: #15803d;
+        .ios-card-form button:hover {
+            background-color: #28a745;
         }
 
-        /* Tablo Konteyneri - Tam Ekran Kaplar */
-        .table-container {
-            flex: 1;
+        /* iOS Tablo Alanı */
+        .ios-table-container {
             width: 100%;
-            height: 100%;
+            max-width: 900px;
+            flex: 1;
             overflow-y: auto;
-            background: white;
-            border: 2px solid #64748b;
-            border-radius: 6px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         table {
@@ -150,39 +180,42 @@
         }
 
         th, td {
-            border: 1px solid #94a3b8; /* Belirgin Excel çizgileri */
-            padding: 16px 20px;        /* Hücreleri genişletir */
-            text-align: left;
-            font-size: 20px;           /* Büyük okunabilir yazı */
+            border-bottom: 1px solid #e5e5ea;
+            padding: 18px 16px;
+            text-align: center; /* YAZILAR TAM ORTALANDI */
+            font-size: 20px;
+            color: #1c1c1e;
         }
 
         th {
-            background-color: #cbd5e1;
-            color: #0f172a;
-            font-weight: 700;
-            font-size: 22px;          /* Başlıklar daha büyük */
+            background-color: #f9f9fb;
+            color: #8e8e93;
+            font-weight: 600;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             position: sticky;
             top: 0;
             z-index: 10;
         }
 
-        tr:nth-child(even) {
-            background-color: #f8fafc;
+        tr:last-child td {
+            border-bottom: none;
         }
 
         .delete-btn {
-            background-color: #ef4444;
+            background-color: #ff3b30; /* iOS Kırmızı Rengi */
             color: white;
             border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: 8px 18px;
+            border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .delete-btn:hover {
-            background-color: #dc2626;
+            background-color: #d70015;
         }
     </STYLE>
 
@@ -200,7 +233,7 @@
 
             if (girilenSifre === dogruSifre) {
                 document.getElementById("loginScreen").style.display = "none";
-                document.getElementById("dataScreen").style.display = "flex";
+                document.getElementById("appScreen").style.display = "flex";
             } else {
                 document.getElementById("errorText").innerText = "Hatalı şifre!";
                 document.getElementById("passInput").value = "";
@@ -215,11 +248,11 @@
         }
 
         function satirEkle() {
-            var neresi = document.getElementById("inputNeresi").value;
+            var isim = document.getElementById("inputIsim").value;
             var kadi = document.getElementById("inputKadi").value;
             var sifre = document.getElementById("inputSifre").value;
 
-            if (neresi === "" || kadi === "" || sifre === "") {
+            if (isim === "" || kadi === "" || sifre === "") {
                 alert("Lütfen tüm alanları doldurun!");
                 return;
             }
@@ -232,15 +265,15 @@
             var cell3 = newRow.insertCell(2);
             var cell4 = newRow.insertCell(3);
 
-            cell1.innerText = neresi;
+            cell1.innerText = isim;
             cell2.innerText = kadi;
             cell3.innerText = sifre;
             cell4.innerHTML = '<button class="delete-btn" onclick="satirSil(this)">Sil</button>';
 
-            document.getElementById("inputNeresi").value = "";
+            document.getElementById("inputIsim").value = "";
             document.getElementById("inputKadi").value = "";
             document.getElementById("inputSifre").value = "";
-            document.getElementById("inputNeresi").focus();
+            document.getElementById("inputIsim").focus();
         }
 
         function satirSil(btn) {
@@ -259,28 +292,32 @@
 
         <DIV class="login-box">
             <INPUT type="password" id="passInput" placeholder="Şifre" onkeypress="tusKontrol(event)" autofocus>
-            <BUTTON onclick="sifreKontrol()">Giriş</BUTTON>
+            <BUTTON onclick="sifreKontrol()">Giriş Yap</BUTTON>
             <DIV class="error-msg" id="errorText"></DIV>
         </DIV>
     </DIV>
 
-    <!-- 2. TAM EKRAN ŞİFRE TABLOSU -->
-    <DIV class="data-screen" id="dataScreen">
+    <!-- 2. iOS UYGULAMA EKRANI -->
+    <DIV class="app-screen" id="appScreen">
         
-        <!-- Üst Ekleme Paneli -->
-        <DIV class="add-form">
-            <INPUT type="text" id="inputNeresi" placeholder="Neresi (ör: Hepsiburada)">
-            <INPUT type="text" id="inputKadi" placeholder="Kullanıcı Adı / E-posta">
-            <INPUT type="text" id="inputSifre" placeholder="Şifre">
-            <BUTTON onclick="satirEkle()">Satır Ekle</BUTTON>
+        <DIV class="app-header">
+            <H1>Şifre Kasası</H1>
         </DIV>
 
-        <!-- Excel Tarzı Büyük Tablo -->
-        <DIV class="table-container">
+        <!-- iOS Form Kartı -->
+        <DIV class="ios-card-form">
+            <INPUT type="text" id="inputIsim" placeholder="İsim">
+            <INPUT type="text" id="inputKadi" placeholder="Kullanıcı Adı">
+            <INPUT type="text" id="inputSifre" placeholder="Şifre">
+            <BUTTON onclick="satirEkle()">Ekle</BUTTON>
+        </DIV>
+
+        <!-- iOS Tablo Kartı -->
+        <DIV class="ios-table-container">
             <TABLE>
                 <THEAD>
                     <TR>
-                        <TH style="width: 30%;">Neresi</TH>
+                        <TH style="width: 30%;">İsim</TH>
                         <TH style="width: 35%;">Kullanıcı Adı</TH>
                         <TH style="width: 25%;">Şifre</TH>
                         <TH style="width: 10%;">İşlem</TH>
