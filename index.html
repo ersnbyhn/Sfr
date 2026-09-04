@@ -1,6 +1,10 @@
 <HTML>
 <HEAD>
+    <!-- IE ve DPI Ölçekleme Sorununu Çözen Meta Etiketleri -->
+    <META http-equiv="X-UA-Compatible" content="IE=edge" />
+    <META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <TITLE>Şifre Programı</TITLE>
+    
     <HTA:APPLICATION 
         ID="SifreProgrami"
         APPLICATIONNAME="Sifre Programi"
@@ -29,9 +33,9 @@
             background-color: #000000;
             overflow: hidden;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* Ekranın yakınlaşmasını ve boyut değiştirmesini engeller */
-            touch-action: manipulation;
-            -ms-content-zooming: none;
+            /* Ekranın kendiliğinden devasa büyümesini engeller */
+            zoom: 100% !important;
+            -ms-high-contrast-adjust: none;
         }
 
         /* 1. GİRİŞ EKRANI */
@@ -48,8 +52,8 @@
 
         .img-wrapper img {
             display: block;
-            max-width: 220px;
-            max-height: 200px;
+            max-width: 180px;
+            max-height: 160px;
             height: auto;
             object-fit: contain;
         }
@@ -62,13 +66,13 @@
         }
 
         .login-box input[type="password"] {
-            padding: 10px 16px;
-            font-size: 16px;
+            padding: 10px 14px;
+            font-size: 15px;
             border: 1px solid #cbd5e1;
             border-radius: 10px;
             outline: none;
             text-align: center;
-            width: 240px;
+            width: 220px;
             background-color: #f8fafc;
         }
 
@@ -78,7 +82,7 @@
         }
 
         .login-box button {
-            padding: 10px 24px;
+            padding: 10px 20px;
             font-size: 15px;
             font-weight: 600;
             color: #ffffff;
@@ -86,7 +90,7 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            width: 240px;
+            width: 220px;
         }
 
         .login-box button:hover {
@@ -95,9 +99,9 @@
 
         .error-msg {
             color: #ff3b30;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            height: 18px;
+            height: 16px;
         }
 
         /* 2. iPHONE APP EKRANI */
@@ -114,12 +118,12 @@
 
         .app-header {
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
             text-align: center;
         }
 
         .app-header h1 {
-            font-size: 22px;
+            font-size: 20px;
             color: #000000;
             font-weight: 700;
         }
@@ -127,18 +131,18 @@
         /* Form Kartı */
         .ios-card-form {
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
             background: #ffffff;
             border-radius: 12px;
-            padding: 12px;
+            padding: 10px;
             display: flex;
             gap: 10px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
 
         .ios-card-form input {
-            padding: 10px 12px;
-            font-size: 15px;
+            padding: 8px 12px;
+            font-size: 14px;
             border: 1px solid #e5e5ea;
             border-radius: 8px;
             flex: 1;
@@ -153,8 +157,8 @@
         }
 
         .ios-card-form button {
-            padding: 10px 20px;
-            font-size: 15px;
+            padding: 8px 18px;
+            font-size: 14px;
             font-weight: 600;
             color: white;
             background-color: #34c759;
@@ -163,14 +167,10 @@
             cursor: pointer;
         }
 
-        .ios-card-form button:hover {
-            background-color: #28a745;
-        }
-
         /* Tablo Kartı */
         .ios-table-container {
             width: 100%;
-            max-width: 800px;
+            max-width: 700px;
             flex: 1;
             overflow-y: auto;
             background: #ffffff;
@@ -185,9 +185,9 @@
 
         th, td {
             border-bottom: 1px solid #e5e5ea;
-            padding: 12px 10px;
+            padding: 10px;
             text-align: center;
-            font-size: 15px;
+            font-size: 14px;
             color: #1c1c1e;
         }
 
@@ -195,7 +195,7 @@
             background-color: #f9f9fb;
             color: #8e8e93;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             position: sticky;
@@ -203,28 +203,21 @@
             z-index: 10;
         }
 
-        tr:last-child td {
-            border-bottom: none;
-        }
-
         .delete-btn {
             background-color: #ff3b30;
             color: white;
             border: none;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-        }
-
-        .delete-btn:hover {
-            background-color: #d70015;
         }
     </STYLE>
 
     <SCRIPT LANGUAGE="VBScript">
         Sub Window_OnLoad
+            ' Pencereyi ekran boyutuna getirir
             window.resizeTo screen.availWidth, screen.availHeight
             window.moveTo 0, 0
         End Sub
@@ -308,7 +301,7 @@
             <H1>Şifre Kasası</H1>
         </DIV>
 
-        <!-- iOS Form Kartı -->
+        <!-- Form Kartı -->
         <DIV class="ios-card-form">
             <INPUT type="text" id="inputIsim" placeholder="İsim">
             <INPUT type="text" id="inputKadi" placeholder="Kullanıcı Adı">
@@ -316,7 +309,7 @@
             <BUTTON onclick="satirEkle()">Ekle</BUTTON>
         </DIV>
 
-        <!-- iOS Tablo Kartı -->
+        <!-- Tablo Kartı -->
         <DIV class="ios-table-container">
             <TABLE>
                 <THEAD>
