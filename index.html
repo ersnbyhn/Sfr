@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <!-- iPhone PWA ve Tam Ekran Ayarları -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Şifre Kasası">
     
-    <title>Şifre Kasası</title>
+    <title>Kasa</title>
     
     <style>
         * {
@@ -31,18 +30,6 @@
             overflow: hidden;
             padding-top: env(safe-area-inset-top);
             padding-bottom: env(safe-area-inset-bottom);
-        }
-
-        .app-header {
-            height: 50px;
-            background-color: #f8f8f8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 0.5px solid #b2b2b2;
-            font-weight: 600;
-            font-size: 17px;
-            color: #000;
         }
 
         /* 1. GİRİŞ EKRANI */
@@ -113,7 +100,7 @@
             display: none;
             flex: 1;
             flex-direction: column;
-            padding: 12px;
+            padding: 12px 12px 0 12px;
             gap: 12px;
             overflow: hidden;
         }
@@ -157,23 +144,25 @@
             flex: 1;
             overflow-y: auto;
             background: #ffffff;
-            border-radius: 12px;
-            border: 1px solid #e5e5ea;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid #d1d1d6;
             -webkit-overflow-scrolling: touch;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed;
         }
 
         th, td {
-            border-bottom: 0.5px solid #e5e5ea;
-            padding: 10px 4px;
+            border: 0.5px solid #d1d1d6;
+            padding: 8px 4px;
             text-align: center;
-            font-size: 13px;
+            font-size: 11px;
             color: #1c1c1e;
             word-break: break-all;
+            hyphens: auto;
         }
 
         th {
@@ -191,7 +180,7 @@
             background-color: #ff3b30;
             color: white;
             border: none;
-            padding: 6px 8px;
+            padding: 5px 8px;
             border-radius: 6px;
             cursor: pointer;
             font-size: 11px;
@@ -202,7 +191,7 @@
             height: 30px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             padding: 0 12px;
             font-size: 11px;
             color: #8e8e93;
@@ -211,9 +200,6 @@
 </head>
 <body>
 
-    <div class="app-header">ŞİFRE KASASI</div>
-
-    <!-- GİRİŞ EKRANI -->
     <div class="login-screen" id="loginScreen">
         <div class="img-wrapper">
             <img src="https://i.ibb.co/23nVyw8g/MG-2684.jpg" alt="Logo">
@@ -226,7 +212,6 @@
         </div>
     </div>
 
-    <!-- TABLO EKRANI -->
     <div class="app-screen" id="appScreen">
         <div class="ios-card-form">
             <input type="text" id="inputIsim" placeholder="İsim (Örn: Instagram)">
@@ -239,9 +224,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 28%;">İsim</th>
-                        <th style="width: 38%;">Kullanıcı Adı</th>
-                        <th style="width: 22%;">Şifre</th>
+                        <th style="width: 24%;">İsim</th>
+                        <th style="width: 44%;">Kullanıcı Adı</th>
+                        <th style="width: 20%;">Şifre</th>
                         <th style="width: 12%;">Sil</th>
                     </tr>
                 </thead>
@@ -251,12 +236,10 @@
     </div>
 
     <div class="phone-footer">
-        <span>Şifre Kasası</span>
         <span>ErsNByhN® 2026</span>
     </div>
 
     <script>
-        // Sayfa yüklendiğinde hafızadaki verileri oku
         document.addEventListener("DOMContentLoaded", verileriYukle);
 
         function sifreKontrol() {
