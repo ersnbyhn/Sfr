@@ -1,8 +1,6 @@
 <HTML>
 <HEAD>
-    <!-- IE ve DPI Ölçekleme Sorununu Çözen Meta Etiketleri -->
     <META http-equiv="X-UA-Compatible" content="IE=edge" />
-    <META name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <TITLE>Şifre Programı</TITLE>
     
     <HTA:APPLICATION 
@@ -18,43 +16,90 @@
         SINGLEINSTANCE="yes"
         SYSMENU="no"
         VERSION="1.0"
-        WINDOWSTATE="maximize"/>
+        WINDOWSTATE="normal"/>
 
     <STYLE>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            user-select: none;
         }
 
         html, body {
             width: 100%;
             height: 100%;
-            background-color: #000000;
-            overflow: hidden;
+            background-color: #1a1a1a; /* Arka plan koyu, telefon kasası öne çıksın */
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            /* Ekranın kendiliğinden devasa büyümesini engeller */
-            zoom: 100% !important;
-            -ms-high-contrast-adjust: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* iPHONE KASASI KUTUSU (Tam Görseldeki Mobil Boyut) */
+        .phone-container {
+            width: 420px;
+            height: 820px;
+            background-color: #f2f2f7;
+            border-radius: 36px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            border: 4px solid #333333;
+        }
+
+        /* Görseldeki Üst Bar ve Kapat Düğmesi */
+        .phone-header {
+            height: 50px;
+            background-color: #f2f2f7;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid #e5e5ea;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #000000;
+            letter-spacing: 1px;
+        }
+
+        .close-btn {
+            background-color: #e53e3e;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
         }
 
         /* 1. GİRİŞ EKRANI */
         .login-screen {
-            width: 100vw;
-            height: 100vh;
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             background-color: #ffffff;
             gap: 20px;
+            padding: 20px;
         }
 
         .img-wrapper img {
             display: block;
-            max-width: 180px;
-            max-height: 160px;
-            height: auto;
+            max-width: 160px;
+            max-height: 150px;
             object-fit: contain;
         }
 
@@ -63,16 +108,17 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            width: 100%;
         }
 
         .login-box input[type="password"] {
-            padding: 10px 14px;
-            font-size: 15px;
-            border: 1px solid #cbd5e1;
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #cbd5e1;
             border-radius: 10px;
             outline: none;
             text-align: center;
-            width: 220px;
+            width: 80%;
             background-color: #f8fafc;
         }
 
@@ -82,83 +128,60 @@
         }
 
         .login-box button {
-            padding: 10px 20px;
-            font-size: 15px;
+            padding: 12px;
+            font-size: 16px;
             font-weight: 600;
             color: #ffffff;
             background-color: #007aff;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            width: 220px;
-        }
-
-        .login-box button:hover {
-            background-color: #0056b3;
+            width: 80%;
         }
 
         .error-msg {
             color: #ff3b30;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            height: 16px;
+            height: 18px;
         }
 
-        /* 2. iPHONE APP EKRANI */
+        /* 2. TABLO UYGULAMA EKRANI (Görseldeki İçi Dolu Mobil Düzen) */
         .app-screen {
             display: none;
-            width: 100vw;
-            height: 100vh;
-            background-color: #f2f2f7;
+            flex: 1;
             flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            gap: 15px;
+            padding: 15px;
+            gap: 12px;
+            background-color: #f2f2f7;
+            overflow: hidden;
         }
 
-        .app-header {
-            width: 100%;
-            max-width: 700px;
-            text-align: center;
-        }
-
-        .app-header h1 {
-            font-size: 20px;
-            color: #000000;
-            font-weight: 700;
-        }
-
-        /* Form Kartı */
+        /* Mobil Form Giriş Alanı */
         .ios-card-form {
-            width: 100%;
-            max-width: 700px;
             background: #ffffff;
             border-radius: 12px;
             padding: 10px;
             display: flex;
-            gap: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            flex-direction: column;
+            gap: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e5ea;
         }
 
         .ios-card-form input {
-            padding: 8px 12px;
+            padding: 10px;
             font-size: 14px;
             border: 1px solid #e5e5ea;
             border-radius: 8px;
-            flex: 1;
-            background-color: #f2f2f7;
+            background-color: #f8fafc;
             outline: none;
             text-align: center;
         }
 
-        .ios-card-form input:focus {
-            background-color: #ffffff;
-            border-color: #007aff;
-        }
-
         .ios-card-form button {
-            padding: 8px 18px;
-            font-size: 14px;
+            padding: 10px;
+            font-size: 15px;
             font-weight: 600;
             color: white;
             background-color: #34c759;
@@ -167,15 +190,14 @@
             cursor: pointer;
         }
 
-        /* Tablo Kartı */
+        /* Mobil Tablo Alanı */
         .ios-table-container {
-            width: 100%;
-            max-width: 700px;
             flex: 1;
             overflow-y: auto;
             background: #ffffff;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e5e5ea;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
         }
 
         table {
@@ -185,45 +207,66 @@
 
         th, td {
             border-bottom: 1px solid #e5e5ea;
-            padding: 10px;
+            padding: 10px 6px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             color: #1c1c1e;
+            word-break: break-all;
         }
 
         th {
             background-color: #f9f9fb;
-            color: #8e8e93;
-            font-weight: 600;
+            color: #000000;
+            font-weight: 700;
             font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
             position: sticky;
             top: 0;
             z-index: 10;
+            border-bottom: 2px solid #e5e5ea;
         }
 
         .delete-btn {
             background-color: #ff3b30;
             color: white;
             border: none;
-            padding: 5px 12px;
+            padding: 4px 8px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
+        }
+
+        /* Alt Bilgi Barı (Görseldeki Gibi) */
+        .phone-footer {
+            height: 25px;
+            background-color: #e5e5ea;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 12px;
+            font-size: 11px;
+            color: #666666;
         }
     </STYLE>
 
     <SCRIPT LANGUAGE="VBScript">
         Sub Window_OnLoad
-            ' Pencereyi ekran boyutuna getirir
-            window.resizeTo screen.availWidth, screen.availHeight
-            window.moveTo 0, 0
+            ' Uygulama penceresini tam olarak mobil boyutuna getirir ve ekranda ortalar
+            Dim w, h, x, y
+            w = 460
+            h = 860
+            x = (screen.availWidth - w) / 2
+            y = (screen.availHeight - h) / 2
+            window.resizeTo w, h
+            window.moveTo x, y
         End Sub
     </SCRIPT>
 
     <SCRIPT LANGUAGE="JavaScript">
+        function kapatProgram() {
+            window.close();
+        }
+
         function sifreKontrol() {
             var girilenSifre = document.getElementById("passInput").value;
             var dogruSifre = "8290028";
@@ -281,54 +324,67 @@
 </HEAD>
 <BODY>
 
-    <!-- 1. GİRİŞ EKRANI -->
-    <DIV class="login-screen" id="loginScreen">
-        <DIV class="img-wrapper">
-            <IMG src="https://i.ibb.co/23nVyw8g/MG-2684.jpg" alt="MG-2684">
-        </DIV>
-
-        <DIV class="login-box">
-            <INPUT type="password" id="passInput" placeholder="Şifre" onkeypress="tusKontrol(event)" autofocus>
-            <BUTTON onclick="sifreKontrol()">Giriş Yap</BUTTON>
-            <DIV class="error-msg" id="errorText"></DIV>
-        </DIV>
-    </DIV>
-
-    <!-- 2. iPHONE UYGULAMA EKRANI -->
-    <DIV class="app-screen" id="appScreen">
+    <!-- TELEFON ÇERÇEVESİ -->
+    <DIV class="phone-container">
         
-        <DIV class="app-header">
-            <H1>Şifre Kasası</H1>
+        <!-- Üst Bar ve Kapat (X) Butonu -->
+        <DIV class="phone-header">
+            <SPAN class="header-title">ŞİFRE KASASI</SPAN>
+            <BUTTON class="close-btn" onclick="kapatProgram()">X</BUTTON>
         </DIV>
 
-        <!-- Form Kartı -->
-        <DIV class="ios-card-form">
-            <INPUT type="text" id="inputIsim" placeholder="İsim">
-            <INPUT type="text" id="inputKadi" placeholder="Kullanıcı Adı">
-            <INPUT type="text" id="inputSifre" placeholder="Şifre">
-            <BUTTON onclick="satirEkle()">Ekle</BUTTON>
+        <!-- 1. GİRİŞ EKRANI -->
+        <DIV class="login-screen" id="loginScreen">
+            <DIV class="img-wrapper">
+                <IMG src="https://i.ibb.co/23nVyw8g/MG-2684.jpg" alt="Logo">
+            </DIV>
+
+            <DIV class="login-box">
+                <INPUT type="password" id="passInput" placeholder="Şifre" onkeypress="tusKontrol(event)" autofocus>
+                <BUTTON onclick="sifreKontrol()">Giriş Yap</BUTTON>
+                <DIV class="error-msg" id="errorText"></DIV>
+            </DIV>
         </DIV>
 
-        <!-- Tablo Kartı -->
-        <DIV class="ios-table-container">
-            <TABLE>
-                <THEAD>
-                    <TR>
-                        <TH style="width: 30%;">İsim</TH>
-                        <TH style="width: 35%;">Kullanıcı Adı</TH>
-                        <TH style="width: 25%;">Şifre</TH>
-                        <TH style="width: 10%;">İşlem</TH>
-                    </TR>
-                </THEAD>
-                <TBODY id="tableBody">
-                    <TR>
-                        <TD>Hepsiburada</TD>
-                        <TD>ersibeyhan@gmail.com</TD>
-                        <TD>123456789</TD>
-                        <TD><BUTTON class="delete-btn" onclick="satirSil(this)">Sil</BUTTON></TD>
-                    </TR>
-                </TBODY>
-            </TABLE>
+        <!-- 2. iPHONE MOBİL TABLO EKRANI -->
+        <DIV class="app-screen" id="appScreen">
+            
+            <!-- Ekleme Formu -->
+            <DIV class="ios-card-form">
+                <INPUT type="text" id="inputIsim" placeholder="İsim (Örn: Hepsiburada)">
+                <INPUT type="text" id="inputKadi" placeholder="Kullanıcı Adı / E-posta">
+                <INPUT type="text" id="inputSifre" placeholder="Şifre">
+                <BUTTON onclick="satirEkle()">Satır Ekle</BUTTON>
+            </DIV>
+
+            <!-- Mobil Tablo -->
+            <DIV class="ios-table-container">
+                <TABLE>
+                    <THEAD>
+                        <TR>
+                            <TH style="width: 30%;">İsim</TH>
+                            <TH style="width: 35%;">Kullanıcı Adı</TH>
+                            <TH style="width: 23%;">Şifre</TH>
+                            <TH style="width: 12%;">Sil</TH>
+                        </TR>
+                    </THEAD>
+                    <TBODY id="tableBody">
+                        <TR>
+                            <TD>Hepsiburada</TD>
+                            <TD>ersibeyhan@gmail.com</TD>
+                            <TD>123456</TD>
+                            <TD><BUTTON class="delete-btn" onclick="satirSil(this)">Sil</BUTTON></TD>
+                        </TR>
+                    </TBODY>
+                </TABLE>
+            </DIV>
+
+        </DIV>
+
+        <!-- Görseldeki Gibi Alt Bilgi Barı -->
+        <DIV class="phone-footer">
+            <SPAN>Şifre Korumalı</SPAN>
+            <SPAN>ErsNByhN® 2026</SPAN>
         </DIV>
 
     </DIV>
